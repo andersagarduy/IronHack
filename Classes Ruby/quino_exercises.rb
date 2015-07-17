@@ -1,6 +1,6 @@
 
 ----------------------------------------
-#---> Duck-Typing exercise(same methods, different classes)
+#---> Duck-Typing exercise(same methods, different classes
 
 class Car
 	attr_accessor :wheels, :noise
@@ -71,6 +71,24 @@ SoundPrinter.make_all_vehicles_make_noise(vehicles)
 
 
 
+class Person
+	attr_accessor :name
+	def initialize name
+		@name = name
+	end
+
+	def be_nice_person person
+		kiss person
+	end
+
+	def kiss person
+		puts person.name + "muak"
+	end
+end
+
+
+
+Person.new("Raul").be_nice_person(Person.new("Dog"))
 
 
 

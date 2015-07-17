@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tasks To-Do List</title>
+</head>
+<body>
+	<h1>Your tasks:</h1>
+
+	<p>
+
+	<% @tasks.each do |task| %>
+
+			<li><%= task.content %></li> 			
+
+			<form action='/newtask' method ="GET">
+	
+			<input name="done_task" type="submit" value="DONE" />
+		
+			</form>
+
+
+
+	<% end %>
+	
+	<!--<form action='/' method ="GET">
+	
+		<input name="done_task" type="submit" value="DONE" />
+		
+	</form>
+</p>
+-->
+
+	<p>
+	<form action='/newtask' method ="GET">
+	
+		<input name="new_task" type="submit" value="Add new task!" />
+		
+	</form>
+	</p>
+
+</body>
+</html>
