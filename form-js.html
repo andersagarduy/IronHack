@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+<form action="" class="form">
+	<div class="box" id="box1">
+	<label for="name">Name</label>
+	<input type="text" id="name" class="input"></input>
+	</div>
+	<br>
+	<div class="box" id="box2">
+	<label for="password">Password</label>
+	<input type="password" id="password" class="input"></input>
+	</div>
+	<br>
+	<button type="submit">Submit!</button>
+</form>
+
+<script type="text/javascript">
+	$('.form').submit(function (event) {
+		
+	if($('#name').val() && $('#password').val()) {
+		console.log('Yes');
+}
+	else {
+		event.preventDefault();
+		if (!$('#name').val()) {
+			console.log("Entraa")
+			$('#box1').append('<p>Falta!!</p>')
+
+		}
+		if (!$('#password').val()) {
+			console.log("Entraa2")
+			$('#box2').append('<p>Falta!!</p>')
+
+		}
+		}
+		return false;
+	});
+</script>
+</body>
+</html>

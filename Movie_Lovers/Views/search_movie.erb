@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Search movies</title>
+</head>
+<body>
+	<h1>Movie Posters with that word:</h1>
+
+		<% @search_array.each do |movie| %>
+			
+			<%if movie.poster != nil%>
+
+				<img src="<%= movie.poster %>" height="240" width="240">
+
+			<% end %>
+
+		<% end %>	
+
+
+</body>
+</html>

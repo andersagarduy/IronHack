@@ -1,0 +1,23 @@
+.menu {
+	display: inline-block;
+	padding: 35px 10px 19px 10px;
+}
+.responsiveimg {
+  	height: 100%;	
+  	margin: 0 auto;
+  	width: 100%;
+}
+.center {
+    text-align: center;
+    vertical-align: baseline;
+    margin: auto;
+    padding: 10px 0px 10px 0px;
+}
+.glyphicon {
+	/*padding: 50px 0px 30px 170px;*/
+	position: absolute;
+	border: 5px solid #fff;
+	border-radius: 35px;
+	width: 70px;
+	height: 70px;
+}
