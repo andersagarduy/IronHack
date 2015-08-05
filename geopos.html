@@ -8,17 +8,36 @@
 	<p id="latitude">Latitude</p>
 	<p id="longitude">Longitude</p>
 
-
+	<img id="map" src="">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 	<script type="text/javascript">
 	navigator.geolocation.watchPosition(function(position) {
 		$('#latitude').text(position.coords.latitude);
-		 $('#longitude').text(position.coords.longitude);
+		$('#longitude').text(position.coords.longitude);
+  		
+  		var lat = position.coords.latitude;
+  		var lon = position.coords.longitude;
+		
+
+		
+		displayMap(lat, lon);
+
 	}, function(error) {console.log(error)}, 
 	{enableHighAccuracy: true});
 
+
+	function displayMap(lat, lon) {
+  	var urlRoot = "https://maps.googleapis.com/maps/api/staticmap?center=";
+  	var urlParams = "&zoom=19&size=400x300";
+
+  	var url = urlRoot + lat + "," + lon + urlParams;
+  	$('#map').attr('src', url);
+  	console.log(url);
+	}
+	
+	
 	</script>
 </body>
 </html>
