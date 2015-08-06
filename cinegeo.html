@@ -1,0 +1,117 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Cine Geolocation</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+	
+	<form action="" class="form">
+	
+		<label for="name">Name of the cinema:</label>
+		<input type="text" id="name" class="input"></input>
+
+		<br>
+
+		<label for="latitude">Latitude:</label>
+		<input type="text" id="latitude" class="input"></input>
+
+		<br>
+
+		<label for="longitude">Longitude:</label>
+		<input type="text" id="longitude" class="input"></input>
+
+
+		<button type="submit" id="button">Get cinema location!</button>
+
+		<br>
+
+		<button id="button1">Get my Location!</button>
+
+<br>
+
+<div id="geo-info">
+  
+</div>
+
+	</form>
+</body>
+</html>
+
+	
+
+<script type="text/javascript">
+	
+	var array_cinemas = []
+
+	$('#button').click(function getCinema(event) {
+		event.preventDefault();
+		
+		var cinema = {
+	    name: $('#name').val(),
+	    latitude: $('#latitude').val(),
+	    longitude: $('#longitude').val()
+	    }
+	    
+	    array_cinemas.push(cinema);
+	    
+	    console.log(array_cinemas);
+		
+		window.localStorage.setItem("cinema_position", JSON.stringify(array_cinemas));
+	});
+
+		var positions_cinema = []
+
+		$('#button1').click(function getLocation(event) {
+      event.preventDefault();
+  			console.log("getting your location")
+  
+			navigator.geolocation.watchPosition(function(position) {    
+    		
+    		var positions = {
+      		latitude: position.coords.latitude,
+      		longitude: position.coords.longitude
+    		}
+       
+        positions_cinema.push(positions)
+        console.log(positions_cinema);
+    		
+        window.localStorage.setItem("my_position", JSON.stringify(positions));
+        
+        $('#geo-info').append('<p>' + positions_cinema[0].latitude + ', ' + positions_cinema[0].longitude + '</p>');     
+
+		}, function(error) {console.log(error)}, 
+			{enableHighAccuracy: true});
+
+  // you know how to do geoloation already, right??
+  // in the success handler, save the location in local storage
+});
+
+	function showLocations() {
+  		console.log("showing locations")
+  
+        var positions = JSON.parse(window.sessionStorage.getItem("cinemas_position"));
+
+
+  		// retrieve the locations from local storage and add them to the DOM
+	}
+
+
+	function distance(lat1, lon1, lat2, lon2, unit) {
+  	var radlat1 = Math.PI * lat1/180
+  	var radlat2 = Math.PI * lat2/180
+  	var radlon1 = Math.PI * lon1/180
+  	var radlon2 = Math.PI * lon2/180
+  	var theta = lon1-lon2
+  	var radtheta = Math.PI * theta/180
+  	var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+  	dist = Math.acos(dist)
+  	dist = dist * 180/Math.PI
+ 	dist = dist * 60 * 1.853159
+  
+  	return dist
+	}
+
+
+
+</script>

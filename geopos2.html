@@ -1,0 +1,60 @@
+<script>
+if ("geolocation" in navigator) {
+  addEventListeners();
+} else {
+  alert("Geolocation is not available")
+}
+
+function addEventListeners() {
+  var saveButton = document.getElementById('save-location');
+  saveButton.addEventListener('click', getLocation);
+  var showButton = document.getElementById('show-locations');
+  showButton.addEventListener('click', showLocations);
+  var clearButton = document.getElementById('clear-locations');
+  clearButton.addEventListener('click', clearLocations);
+}
+
+array_locations = []
+
+function getLocation() {
+  console.log("getting your location")
+  
+	navigator.geolocation.watchPosition(function(position) {
+		console.log(position.coords.latitude);
+		console.log(position.coords.longitude);
+    
+    var position = {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+    }
+   array_locations.push(position)
+   
+   window.sessionStorage.setItem("position", JSON.stringify(array_locations));
+    
+    
+   
+    
+    }, function(error) {console.log(error)}, 
+	  {enableHighAccuracy: true});
+
+  // you know how to do geoloation already, right??
+  // in the success handler, save the location in local storage
+}
+
+function showLocations() {
+  console.log("showing locations")
+  
+       var positions = JSON.parse(window.sessionStorage.getItem("position"));
+
+  $('#location-list').empty();
+    positions.forEach(function(position) {
+    $('#location-list').append('<li>' + position.latitude + ', ' +        position.longitude + '</li>')
+    })
+  // retrieve the locations from local storage and add them to the DOM
+}
+
+function clearLocations() {
+  console.log('All cleared!')
+  // remove the locations from local storage
+}
+</script>
