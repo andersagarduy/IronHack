@@ -1,0 +1,25 @@
+<% if flash[:notice] %>
+	<%=flash[:notice]%>
+<%end%>
+
+
+
+
+
+<h3>Current Concerts:</h3>
+
+	<% @concerts.each do |concert| %>
+		<div class="test">
+			<%= link_to(concert.band, concert_path(concert)) %>
+			
+			<%= button_to('Delete', concert_path(concert),
+			method: :delete, data: {confirm: 'Are you sure?'}) %>
+			<br>
+		</div>
+
+	<% end %>
+
+		<%= button_to('Add concert', new_concert_path, method: :get, style: 'background-color: #66FF99; border-radius: 10px;') %>
+
+
+

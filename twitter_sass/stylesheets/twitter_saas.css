@@ -1,0 +1,15 @@
+/* line 1, ../sass/twitter_saas.scss */
+.rounded {
+  border-radius: 50%;
+}
+
+/* line 4, ../sass/twitter_saas.scss */
+.header {
+  padding: 25px 50px 0px 20px;
+  display: inline-block;
+}
+
+/* line 8, ../sass/twitter_saas.scss */
+.topcontainer {
+  padding-top: 50px;
+}

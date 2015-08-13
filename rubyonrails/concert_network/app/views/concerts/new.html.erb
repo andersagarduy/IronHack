@@ -1,0 +1,52 @@
+<% if @concert.errors.any? %>
+	<ul>
+		<% @concert.errors.full_messages.each do |error| %>
+			<li> <%= error %></li>
+		<%end%>
+	</ul>
+<%end%>
+
+
+<% if flash[:alert] %>
+	<%=flash[:alert]%>
+<%end%>
+
+
+<h3>Add new Concert:</h3>
+<div class="test">
+<%= form_for @concert do |f|%>
+	<%= f.label :band %>
+	<br>
+	<%= f.text_field :band %>
+</div>
+	<br>
+<div class="test">	
+	<%= f.label :city %>
+	<br>
+	<%= f.text_field :city %>
+</div>	
+	<br>
+<div class="test">	
+	<%= f.label :date %>
+	<br>
+	<%= f.text_field :date %>
+	<br>
+</div>	
+	<%= f.label :price %>
+	<br>
+	<%= f.text_field :price %>
+	<br>
+<div style="padding-top: 10px;">	
+	<%= f.label :description %>
+	<br>
+	<%= f.text_field :description %>
+</div>				
+	<br>
+<div class="test">	
+	<%= f.submit "Add concert" %>	
+</div>
+<%end%>
+
+<div>
+<%= button_to('Return to index', concerts_path, method: :get) %>
+</div>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ConcertNetwork</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" type="text/css" href="concert.css">
+</head>
+<header class="header">
+	<h1>Concert App</h1>
+</header>
+<body style="background-color: #E6E6E6;">
+	<div class="wraper">
+		<div class="content_backgrounds">
+			<div class="content">
+				<%= yield %>
+			</div>
+		</div>
+	</div>
+</body>
+<footer class="footer">
+	<p>by Ander Sagarduy <a href="www.chameleonstudios.es"> Chameleon Studios </a></p>
+</footer>
+</html>
+
+
