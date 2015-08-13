@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<img src="http://img4.wikia.nocookie.net/__cb20130327155437/logopedia/images/archive/c/c8/20130328225038!Spotify_logo_detail.png" width="250">
+	<form action="" class="form">
+	
+		<label for="name">Artist:</label>
+		<input type="text" id="name" class="input"></input>
+
+		<button type="submit" id="button">Search!</button>
+
+	</form>
+
+	<div>
+		<ul class="list">
+			
+		</ul>
+	</div>
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	
+	<script type="text/javascript">
+
+		$('button').click(function (event) {
+			event.preventDefault();
+			var artistToSearch = $('#name').val();
+			var url = "https://api.spotify.com/v1/search?type=artist&query=" + artistToSearch;
+			$.get(url, handleArtist)
+		});
+
+		function handleArtist (artist) {
+			console.log('Request done!', artist);
+			iterate(artist);
+
+		function iterate (artist) {
+			$('.list').empty();
+			artist.artists.items.forEach(function(artist) { 
+				if (artist.images[1].url) {
+					$('.list').append('<li>' + artist.name + '</li>')
+					$('.list').append('<li>' + artist.popularity + '</li>')
+					$('.list').append('<li>' + artist.type + '</li>')
+					$('.list').append('<img src="' + artist.images[1].url + '"width="250">')
+					}
+				});
+			};	
+		}
+
+	</script>
+</body>
+</html>

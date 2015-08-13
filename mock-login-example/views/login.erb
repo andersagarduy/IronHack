@@ -1,0 +1,11 @@
+<% if @error %>
+  <p><%= @error %></p>
+<% end %>
+
+<form action="" method="POST">
+  <label for="username">Username:</label>
+  <input type="username" name="username" value="">
+  <br /><label for="password">Password:</label>
+  <input type="password" name="password" value="">
+  <br /><button type="submit" name="button">Log me in!</button>
+</form>

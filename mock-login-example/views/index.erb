@@ -1,0 +1,5 @@
+<% if @current_user.nil? %>
+  <h1 class="my-greeting">Hi world!</h1>
+<% else %>
+  <h1 class="my-greeting">Hi <%= @current_user[:name] %>!</h1>
+<% end %>

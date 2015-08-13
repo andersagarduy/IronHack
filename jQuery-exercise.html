@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>jQuery</title>
+	</head>
+	<body>
+		<button name="Refresh" id="button">Refresh</button>
+		<p class="motivationalPhrase">
+		</p>
+
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script type="text/javascript">
+			var phrases = ['I like pie', 'Add some of your own phrases here', 'Make sure to follow these rules'];
+
+			$('button').click(function () {
+				var randomPhrase = phrases[getRandomInt(3)];
+
+				$(".motivationalPhrase").text(randomPhrase);
+			});
+
+			function getRandomInt(max) {
+			  return Math.floor(Math.random()*(max));
+			};
+		</script>
+	</body>
+</html>		
