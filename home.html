@@ -1,0 +1,157 @@
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+<div id="backphoto">
+	<div class="header-form">	
+
+		<img src="http://buzzlightyear182.github.io/Mini-Player/spotify-logo.jpg" width="300">
+		
+		
+
+	</div>
+
+
+
+	<div class="widget">
+			<div class="header">
+
+
+			<div class="btn-play"></div>
+
+			<div class="metadata">
+		  		<p class="title"></p>
+		 		<p class="author"></p> 
+
+		  		<div class="seekbar">
+		    		<progress value="" max="30"></progress>
+		 		</div>
+			</div>
+			</div>
+				
+			<div class="cover">
+				<img src="https://i.scdn.co/image/c14819d74c35a668cd4a7b4d8e3922ba26ec7b8b">
+			</div>
+
+			<!-- Song submit form -->
+			
+			<form action="" class="form">
+		
+			<input type="text" id="song" class="input"></input>
+
+			<button type="submit" class="btn btn-default" id="button">Search!</button>
+
+			</form>
+			
+			<!-- Song submit form -->
+			
+			<audio class="js-player" src=""></audio>
+			
+	</div>
+
+
+
+	  <!-- Modal -->
+	<div class="modal fade js-modal" id="myModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+
+	      <div class="modal-header">
+	        <!-- Close button -->
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span>&times;</span>
+	        </button>
+
+	        <h2 id="artist-info">Artist Info:</h2>
+
+	        <div>
+	        	<p id="artistinfo"></p>
+	        	<p id="genres"></p>
+	        	<p id="followers"></p>
+	        </div>
+	        	
+	      </div>
+
+	      <div class="modal-body">
+	        <p>This is the modal's body.</p>
+	      </div>
+
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>	
+
+	<script type="text/javascript">
+
+		$('#button').click(function (event) {
+			event.preventDefault();
+			var songToSearch = $('#song').val();
+			var url = "https://api.spotify.com/v1/search?type=track&query=" + songToSearch;
+			$.get(url, handleSong)
+		});
+
+		function handleSong (song) {
+			console.log('Request done!', song);
+			showInfoSong(song);
+
+		function showInfoSong (song) {
+			$('.title').html('<p>' + song.tracks.items[0].name + '<p>')
+			$('.author').html('<a href="">' + song.tracks.items[0].artists[0].name + '</a>')
+			$('.js-player').attr('src', song.tracks.items[0].preview_url);
+			$('.cover').html('<img src="' + song.tracks.items[0].album.images[0].url + '">')
+			$('#artist-info').text(song.tracks.items[0].artists[0].name)
+			$('.modal-body').html('<img src="' + song.tracks.items[0].album.images[0].url + '" width=250>')
+			
+			var id = song.tracks.items[0].artists[0].id;
+			var request2 = "https://api.spotify.com/v1/artists/" + id;
+			$.get(request2, handleArtist)
+			};	
+		};
+
+		function handleArtist (request2) {
+			console.log('Request done!', request2);
+			showInfoArtist(request2);
+		
+		function showInfoArtist (request2) {
+				$('#artistinfo').html('- Popularity: ' + request2.popularity)
+				$('#followers').html('- Followers: ' + request2.followers.total)
+				$('#genres').html('- Genres: ' + request2.genres)
+				$('.modal-body').html('<img src="' + request2.images[1].url + '" width=250>')
+			};	
+		};
+
+		$('.author').click(function (event) {
+			event.preventDefault();
+			$('.js-modal').modal();
+		});
+
+		$('.btn-play').click(function (event) {
+			event.preventDefault();
+			$('.btn-play').toggleClass('playing');	
+			if ($('.btn-play').hasClass('playing')) {
+				$('.js-player').trigger('play');
+			} else {
+				$('.btn-play').removeClass('playing');
+				$('.js-player').trigger('pause');
+			};
+		});		
+
+		$('.js-player').on('timeupdate', printTime);
+		function printTime () {
+  			var current = $('.js-player').prop('currentTime');
+  			console.debug('Current time: ' + current);
+  			$('progress').prop('value', current);
+		}
+		
+	</script>		
+</div>
+</body>
+</html>
